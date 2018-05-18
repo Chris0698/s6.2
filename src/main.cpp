@@ -21,9 +21,12 @@ int main() {
     pc.printf("ready");
     queue.call_every(500, flash);
     queue.call_every(300, blink);
+
     pc.printf("dispatching...");
+    //EventQueue will not execute until this method is called.
     queue.dispatch_forever();
-    //worker.start(callback(&queue, &EventQueue::dispatch_forever ));
+
+    worker.start(callback(&queue, &EventQueue::dispatch_forever ));
     pc.printf("dispatched");
     while(1){}
 }
